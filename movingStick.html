@@ -1,0 +1,22 @@
+<HTML>
+<BODY>
+<canvas width="1000", height="1000", id="lab01">
+</canvas>
+
+<script>
+    var canvas = document.getElementById("lab01");
+    var ctx = canvas.getContext("2d");
+
+    j = 0;
+    setInterval(function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        for (let i = 0; i < 50; i++){
+            ctx.fillRect(10+i+j, 10+i+j, 1, 1);
+            ctx.fillStyle = "#17A074";
+        }
+        j += 1;
+    }, 100);
+</script>
+
+</BODY>
+</HTML>
