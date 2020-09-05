@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<canvas width="1000" , height="1000" , id="DZ2">
+</canvas>
+
+<script>
+    var canvas = document.getElementById("DZ2");
+    var ctx = canvas.getContext("2d");
+
+    function minus(x, y) {
+        for (let i = -10; i < 10; ++i) {
+            ctx.fillRect(x + i, y, 1, 1);
+            ctx.fillStyle = "#243A09";
+        }
+    }
+
+    function plus(x, y) {
+        for (let i = -10; i < 10; ++i) {
+            ctx.fillRect(x + i, y, 1, 1);
+            ctx.fillStyle = "#243A09";
+        }
+        for (let i = -10; i < 10; ++i) {
+            ctx.fillRect(x, y + i, 1, 1);
+            ctx.fillStyle = "#243A09";
+        }
+    }
+
+    function right(timer) {
+        y = 30 * Math.sin(timer) + 50;
+        console.log("right  x=", timer, "   y=", y);
+        plus(timer, y);
+    }
+
+    function left(timer) {
+        y = 950 - 30 * Math.sin(1000 - timer);
+        console.log("left  x=", 1000-timer, "   y=", y);
+        plus(1000 - timer, y);
+    }
+
+    function down(timer) {
+        x = 950 - 30 * Math.sin(timer-1000);
+        console.log("down  x=", x, "   y=", timer - 1000);
+        minus(x, timer- 1000);
+    }
+
+    function up(timer) {
+        x = 50+30 * Math.sin(2000 - timer);
+        console.log("down  x=", x, "   y=", 2000-timer);
+        minus(x, 2000 - timer);
+    }
+
+    function print(timer) {
+        if (Math.floor(timer / 2000) % 2 === 0) {
+            if (timer % 2000 < 1000) {
+                right(timer % 2000);
+            } else {
+                down(timer % 2000);
+            }
+        } else {
+            if (timer % 2000 < 1000) {
+                left(timer % 2000);
+            } else {
+                up(timer % 2000);
+            }
+        }
+    }
+
+    timer = 0;
+    setInterval(function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        print(timer);
+        timer+=10;
+    }, 100);
+</script>
+</BODY>
+</HTML>
