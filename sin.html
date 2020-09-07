@@ -1,6 +1,6 @@
 <HTML>
 <BODY>
-<canvas width="1000" , height="1000" , id="DZ2">
+<canvas width="1920" , height="1080" , id="DZ2">
 </canvas>
 
 <script>
@@ -26,41 +26,41 @@
     }
 
     function right(timer) {
-        y = 30 * Math.sin(timer) + 50;
+        y = 100 * Math.sin(timer) + 150;
         console.log("right  x=", timer, "   y=", y);
         plus(timer, y);
     }
 
     function left(timer) {
-        y = 950 - 30 * Math.sin(1000 - timer);
-        console.log("left  x=", 1000-timer, "   y=", y);
-        plus(1000 - timer, y);
+        y = 930 - 100 * Math.sin(1920 - timer);
+        console.log("left  x=", 1920-timer, "   y=", y);
+        plus(1920 - timer, y);
     }
 
     function down(timer) {
-        x = 950 - 30 * Math.sin(timer-1000);
-        console.log("down  x=", x, "   y=", timer - 1000);
-        minus(x, timer- 1000);
+        x = 1770 - 100 * Math.sin(timer-1920);
+        console.log("down  x=", x, "   y=", timer - 1920);
+        minus(x, timer- 1920);
     }
 
     function up(timer) {
-        x = 50+30 * Math.sin(2000 - timer);
-        console.log("down  x=", x, "   y=", 2000-timer);
-        minus(x, 2000 - timer);
+        x = 150+100 * Math.sin(3000 - timer);
+        console.log("down  x=", x, "   y=", 3000-timer);
+        minus(x, 3000 - timer);
     }
 
     function print(timer) {
-        if (Math.floor(timer / 2000) % 2 === 0) {
-            if (timer % 2000 < 1000) {
-                right(timer % 2000);
+        if (Math.floor(100*timer / 3000) % 2 === 0) {
+            if (100*timer % 3000 < 1920) {
+                right(100*timer % 3000);
             } else {
-                down(timer % 2000);
+                down(100*timer % 3000);
             }
         } else {
-            if (timer % 2000 < 1000) {
-                left(timer % 2000);
+            if (100*timer % 3000 < 1920) {
+                left(100*timer % 3000);
             } else {
-                up(timer % 2000);
+                up(100*timer % 3000);
             }
         }
     }
@@ -69,7 +69,7 @@
     setInterval(function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         print(timer);
-        timer+=10;
+        timer+=0.5;
     }, 100);
 </script>
 </BODY>
