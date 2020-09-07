@@ -1,0 +1,430 @@
+<HTML>
+<BODY>
+<canvas width="1920" , height="1080" , id="lab01">
+</canvas>
+
+<script>
+    var canvas = document.getElementById("lab01");
+    var ctx = canvas.getContext("2d");
+
+
+    function horizontalPrintRight(x, y, timer) {
+        ctx.fillRect(x + timer, y, 1, 1);
+        ctx.fillStyle = "#17A074";
+        //console.log("right");
+    }
+
+    function horizontalPrintLeft(x, y, timer) {
+        ctx.fillRect(x - timer, y, 1, 1);
+        ctx.fillStyle = "#17A074";
+        //console.log("left");
+        //console.log(x - timer, "   ", y);
+    }
+
+    function verticalPrintDown(x, y, timer) {
+        ctx.fillRect(x, y + timer, 1, 1);
+        ctx.fillStyle = "#17A074";
+        //console.log("down");
+    }
+
+    function verticalPrintUp(x, y, timer) {
+        ctx.fillRect(x, y - timer, 1, 1);
+        ctx.fillStyle = "#17A074";
+        //printDot(175);
+    }
+
+    function horizontalClearRight(x, y, timer) {
+        ctx.clearRect(x + timer, y, 1, 1);
+    }
+
+    function horizontalClearLeft(x, y, timer) {
+        ctx.clearRect(x - timer, y, 1, 1);
+    }
+
+    function verticalClearDown(x, y, timer) {
+        ctx.clearRect(x, y + timer, 1, 1);
+    }
+
+    function verticalClearUp(x, y, timer) {
+        ctx.clearRect(x, y - timer, 1, 1);
+    }
+
+    function diagonalPrint(x, y, timer) {
+        ctx.fillRect(x + timer, y - timer, 1, 1);
+        ctx.fillStyle = "#17A074";
+        //console.log("diagonal");
+    }
+
+    function diagonalClear(x, y, timer) {
+        ctx.clearRect(x + timer, y - timer, 1, 1);
+    }
+
+    function zero(arr, zeroIndex) {
+        //console.log("x=", arr[zeroIndex+1], "   y=", arr[zeroIndex+2]);
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            verticalPrintUp(arr[zeroIndex + 1], arr[zeroIndex + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintUp(arr[zeroIndex + 1], arr[zeroIndex + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            horizontalPrintRight(arr[zeroIndex + 1], arr[zeroIndex + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            verticalPrintDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            verticalPrintDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 5) {
+            horizontalPrintLeft(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            verticalClearUp(arr[zeroIndex + 1], arr[zeroIndex + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearUp(arr[zeroIndex + 1], arr[zeroIndex + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            horizontalClearRight(arr[zeroIndex + 1], arr[zeroIndex + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            verticalClearDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            verticalClearDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 12) {
+            horizontalClearLeft(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2], arr[36] % 50);
+        }
+        //console.log(arr[36]);
+    }
+
+    function one(arr, index) {
+        //console.log("1");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            diagonalPrint(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            diagonalClear(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        }
+    }
+
+    function two(arr, index) {
+        //console.log("2");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            horizontalPrintLeft(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            verticalPrintDown(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            horizontalClearRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            horizontalClearLeft(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            verticalClearDown(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            horizontalClearRight(arr[index + 1], arr[index + 2] + 100, arr[36] % 50);
+        }
+    }
+
+    function three(arr, index) {
+        //console.log("3");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            horizontalPrintLeft(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            horizontalPrintLeft(arr[index + 1] + 50, arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            horizontalClearRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            horizontalClearLeft(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            horizontalClearLeft(arr[index + 1] + 50, arr[index + 2] + 100, arr[36] % 50);
+        }
+    }
+
+    function four(arr, index) {
+        //console.log("4");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            verticalPrintDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            verticalClearDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            horizontalClearRight(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        }
+    }
+
+    function five(arr, index) {
+        //console.log("5");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            verticalPrintDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            horizontalPrintLeft(arr[index + 1] + 50, arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            verticalClearDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            horizontalClearRight(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            horizontalClearLeft(arr[index + 1] + 50, arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            horizontalClearRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        }
+    }
+
+    function six(arr, index) {
+        //console.log("6");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            horizontalPrintLeft(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintDown(arr[index + 1] - 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] - 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            horizontalPrintRight(arr[index + 1] - 50, arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            verticalPrintUp(arr[index + 1], arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 5) {
+            horizontalPrintLeft(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            horizontalClearLeft(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearDown(arr[index + 1] - 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] - 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            horizontalClearRight(arr[index + 1] - 50, arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            verticalClearUp(arr[index + 1], arr[index + 2] + 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 12) {
+            horizontalClearLeft(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        }
+    }
+
+    function seven(arr, index) {
+        //console.log("7");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            horizontalClearRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] + 50, arr[36] % 50);
+        }
+    }
+
+    function eight(arr, index) {
+        //console.log("8");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            verticalPrintUp(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            horizontalPrintLeft(arr[index + 1], arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintDown(arr[index + 1] - 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            horizontalPrintRight(arr[index + 1] - 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            verticalPrintDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 5) {
+            horizontalPrintLeft(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 6) {
+            verticalPrintUp(arr[index + 1] - 50, arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            verticalClearUp(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            horizontalClearLeft(arr[index + 1], arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearDown(arr[index + 1] - 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            horizontalClearRight(arr[index + 1] - 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            verticalClearDown(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 12) {
+            horizontalClearLeft(arr[index + 1], arr[index + 2] + 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 13) {
+            verticalClearUp(arr[index + 1] - 50, arr[index + 2] + 50, arr[36] % 50);
+        }
+    }
+
+    function nine(arr, index) {
+        //console.log("9");
+        if (Math.floor(arr[36] / 50) % 14 === 0) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 1) {
+            verticalPrintUp(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 2) {
+            verticalPrintUp(arr[index + 1] + 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 3) {
+            horizontalPrintLeft(arr[index + 1] + 50, arr[index + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 4) {
+            verticalPrintDown(arr[index + 1], arr[index + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 5) {
+            horizontalPrintRight(arr[index + 1], arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 7) {
+            horizontalClearRight(arr[index + 1], arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 8) {
+            verticalClearUp(arr[index + 1] + 50, arr[index + 2], arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 9) {
+            verticalClearUp(arr[index + 1] + 50, arr[index + 2] - 50, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 10) {
+            horizontalClearLeft(arr[index + 1] + 50, arr[index + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 11) {
+            verticalClearDown(arr[index + 1], arr[index + 2] - 100, arr[36] % 50);
+        } else if (Math.floor(arr[36] / 50) % 14 === 12) {
+            horizontalClearRight(arr[index + 1], arr[index + 2] - 50, arr[36] % 50);
+        }
+    }
+
+    function printDot(x) {
+        ctx.fillRect(x, 150, 10, 10);
+        ctx.fillStyle = "#17A074";
+    }
+
+    function print(newArr) {
+        for (let i = 0; i < 36; i += 3) {
+            if (newArr[i] === 0) {
+                zero(newArr, i);
+            } else if (newArr[i] === 1) {
+                one(newArr, i);
+            } else if (newArr[i] === 2) {
+                two(newArr, i);
+                //console.log("2");
+            } else if (newArr[i] === 3) {
+                three(newArr, i);
+            } else if (newArr[i] === 4) {
+                four(newArr, i);
+            } else if (newArr[i] === 5) {
+                five(newArr, i);
+            } else if (newArr[i] === 6) {
+                six(newArr, i);
+            } else if (newArr[i] === 7) {
+                seven(newArr, i);
+            } else if (newArr[i] === 8) {
+                eight(newArr, i);
+            } else if (newArr[i] === 9) {
+                nine(newArr, i);
+            }
+        }
+        newArr[36] += 1;
+        return newArr;
+    }
+
+    function setCoordinateX(num, index) {
+        if (num === 6 || num === 8) {
+            if (index < 2) {
+                x = 100 * index + 100;
+            } else if (index < 4) {
+                x = 100 * index + 150;
+            } else if (index < 8) {
+                x = 100 * index + 200;
+            } else if (index < 10) {
+                x = 100 * (index - 8) + 100;
+            } else {
+                x = 100 * (index - 8) + 150;
+            }
+        } else {
+            if (index < 2) {
+                x = 100 * index + 50;
+            } else if (index < 4) {
+                x = 100 * index + 100;
+            } else if (index < 8) {
+                x = 100 * index + 150;
+            } else if (index < 10) {
+                x = 100 * (index - 8) + 50;
+            } else {
+                x = 100 * (index - 8) + 100;
+            }
+        }
+        return x;
+    }
+
+    function setCoordinateY(num) {
+        if (num === 1 || num === 8) {
+            y = 200;
+        } else if (num === 0 || num === 9) {
+            y = 250;
+        } else {
+            y = 150;
+        }
+        return y;
+    }
+
+    function setArray() {
+        let date = new Date();
+        let array = new Array();
+        array[0] = Math.floor(date.getDate() / 10);
+        array[3] = date.getDate() % 10;
+        array[6] = Math.floor((date.getMonth() + 1) / 10);
+        array[9] = (date.getMonth() + 1) % 10;
+        array[12] = Math.floor(date.getFullYear() / 1000);
+        array[15] = Math.floor(date.getFullYear() / 100) % 10;
+        array[18] = Math.floor(date.getFullYear() / 10) % 10;
+        array[21] = date.getFullYear() % 10;
+        array[24] = Math.floor(date.getHours() / 10);
+        array[27] = date.getHours() % 10;
+        array[30] = Math.floor(date.getMinutes() / 10);
+        array[33] = date.getMinutes() % 10;
+        array[36] = 0;
+        for (let i = 1; i < 24; i++) {
+            if (i % 3 === 1) {
+                array[i] = setCoordinateX(array[i - 1], Math.floor(i / 3));
+            } else if (i % 3 === 2) {
+                array[i] = setCoordinateY(array[i - 2]);
+            }
+        }
+        for (let i = 24; i < 36; i++) {
+            if (i % 3 === 1) {
+                array[i] = setCoordinateX(array[i - 1], Math.floor(i / 3));
+            } else if (i % 3 === 2) {
+                array[i] = 300 + setCoordinateY(array[i - 2]);
+            }
+        }
+        for (let i = 0; i < 36; i += 3) {
+            console.log(array[i], "  ", array[i + 1], "  ", array[i + 2]);
+        }
+        return array;
+    }
+
+    arr = setArray();
+    setInterval(function () {
+        arr = print(arr);
+    }, 20);
+</script>
+
+</BODY>
+</HTML>
