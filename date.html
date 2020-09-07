@@ -50,13 +50,13 @@
     }
 
     function diagonalPrint(x, y, timer) {
-        ctx.fillRect(x + timer, y + timer, 1, 1);
+        ctx.fillRect(x + timer, y - timer, 1, 1);
         ctx.fillStyle = "#17A074";
         //console.log("diagonal");
     }
 
     function diagonalClear(x, y, timer) {
-        ctx.clearRect(x + timer, y + timer, 1, 1);
+        ctx.clearRect(x + timer, y - timer, 1, 1);
     }
 
     function zero(arr, zeroIndex) {
@@ -94,15 +94,15 @@
         if (Math.floor(arr[24] / 50) % 14 === 0) {
             diagonalPrint(arr[index + 1], arr[index + 2], arr[24] % 50);
         } else if (Math.floor(arr[24] / 50) % 14 === 1) {
-            verticalPrintDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 50, arr[24] % 50);
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2] - 50, arr[24] % 50);
         } else if (Math.floor(arr[24] / 50) % 14 === 2) {
-            verticalPrintDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2], arr[24] % 50);
+            verticalPrintDown(arr[index + 1] + 50, arr[index + 2], arr[24] % 50);
         } else if (Math.floor(arr[24] / 50) % 14 === 7) {
-            diagonalClear(arr[zeroIndex + 1], arr[zeroIndex + 2], arr[24] % 50);
+            diagonalClear(arr[index + 1], arr[index + 2], arr[24] % 50);
         } else if (Math.floor(arr[24] / 50) % 14 === 8) {
-            verticalClearDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2] - 50, arr[24] % 50);
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2] - 50, arr[24] % 50);
         } else if (Math.floor(arr[24] / 50) % 14 === 9) {
-            verticalClearDown(arr[zeroIndex + 1] + 50, arr[zeroIndex + 2], arr[24] % 50);
+            verticalClearDown(arr[index + 1] + 50, arr[index + 2], arr[24] % 50);
         }
     }
 
@@ -395,8 +395,8 @@
                 array[i] = setCoordinateY(array[i - 2]);
             }
         }
-        for (let i = 0; i < 24; i += 3){
-            console.log(array[i], "  ", array[i+1], "  ", array[i+2]);
+        for (let i = 0; i < 24; i += 3) {
+            console.log(array[i], "  ", array[i + 1], "  ", array[i + 2]);
         }
         return array;
     }
@@ -404,7 +404,7 @@
     arr = setArray();
     setInterval(function () {
         arr = print(arr);
-    }, 100);
+    }, 20);
 </script>
 
 </BODY>
